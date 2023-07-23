@@ -2,9 +2,8 @@
 
 namespace CardurrexAPI.Data.Beans.Responses
 {
-    public class LoginResponse
+    public class RegisterResponse
     {
-
         public Users UserInfo { get; set; }
 
     }

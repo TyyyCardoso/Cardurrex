@@ -1,40 +1,47 @@
-﻿using CardurrexAPI.Utils.Enums;
+﻿
 using System.Runtime.CompilerServices;
+using CardurrexAPI.Utils.Enums;
+using CardurrexAPI.Utils;
 
 namespace CardurrexAPI.Data.Beans
 {
     public class ResponseBean
     {
-        public string resCode { get; set; }
-        public string resMessage { get; set; }
-        public object resObj { get; set; }
+        public ResponseHeader header { get; set; }
+        public ResponseBody body { get; set; }
+
+        public ResponseBean()
+        {
+            header = new ResponseHeader();
+            body = new ResponseBody();
+        }
 
         public void SetSuccessResponse()
         {
-            resCode = ResCodesEnum.RESCODE_SUCCESS_RESPONSE.ToString();
+            header.resCode = ResCodesConstants.RESCODE_SUCCESS_RESPONSE;
         }
 
         public void SetSuccessResponseWithMessage(string message)
         {
-            resCode = ResCodesEnum.RESCODE_SUCCESS_RESPONSE.ToString();
-            resMessage = message;
+            header.resCode = ResCodesConstants.RESCODE_SUCCESS_RESPONSE;
+            header.resMessage = ResourcesUtils.GetMessageFromResource(message);
         }
 
         public void SetErrorResponse()
         {
-            resCode = ResCodesEnum.RESCODE_GENERIC_ERROR_RESPONSE.ToString();
-            resMessage = "";
+            header.resCode = ResCodesConstants.RESCODE_GENERIC_ERROR_RESPONSE;
+            header.resMessage = ResourcesUtils.GetMessageFromResource("GENERIC_ERROR");
         }
 
         public void SetErrorResponseWithMessage(string message)
         {
-            resCode = ResCodesEnum.RESCODE_GENERIC_ERROR_RESPONSE.ToString();
-            resMessage = message;
+            header.resCode = ResCodesConstants.RESCODE_GENERIC_ERROR_RESPONSE;
+            header.resMessage = message;
         }
 
         public void SetPayDataObject(Object obj)
         {
-            resObj = obj;
+            body.resObj = obj;
         }
 
 
